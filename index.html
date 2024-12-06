@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>{{game.title}}</title>
+    <link href="/static/game.css" rel="stylesheet">
+</head>
+<body>
+<div id="root">
+    <div class="rootContainer">
+        <aside class="playerContainer">
+            <div id="hand" class="hand"></div>
+            <div id="player" class="player"></div>
+        </aside>
+        <main class="dungeonContainer">
+            <div id="dungeon" class="dungeon"></div>
+            <div id="log" class="log"></div>
+        </main>
+        <aside id="bag" class="bagContainer"></aside>
+    </div>
+</div>
+<script src="/static/dictionary.js" type="application/javascript"></script>
+<script src="/static/translation/en.js" type="application/javascript"></script>
+<script src="/static/encounter.js" type="application/javascript"></script>
+<script src="/static/render.js" type="application/javascript"></script>
+<script src="/static/setup.js" type="application/javascript"></script>
+<script src="/static/game.js" type="application/javascript"></script>
+<script>(() => main())();</script>
+</body>
+</html>

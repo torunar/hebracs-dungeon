@@ -1,0 +1,323 @@
+* {
+    margin: 0;
+    box-sizing: border-box;
+    font-family: serif;
+    line-height: 1;
+}
+
+#root {
+    --cardWidth: 10vh;
+    --cardHeight: calc(var(--cardWidth) * 1.4);
+    --cardBorderWidth: calc(var(--cardWidth) / 40);
+    --cardColorBlackSuit: #444;
+    --cardColorRedSuit: indianred;
+    --cardColorBorder: #444;
+    --cardColorFace: beige;
+    --cardColorBack: #B1C29E;
+    --uiGapSize: calc(var(--cardWidth) / 10);
+    --uiBorderWidth: calc(var(--cardWidth) / 20);
+    --uiColorBackground: black;
+    --uiColorFont: beige;
+    --uiFontSize: calc(var(--cardWidth) / 6);
+    --uiFontSizeSmall: calc(var(--cardWidth) / 7);
+    --fieldColorBackground: #659287;
+    --fieldColorBorder: #DEAA79;
+    --entranceColor: beige;
+    --entranceColorActive: #DEAA79;
+    --playerColor: beige;
+
+    height: 100vh;
+    background: var(--uiColorBackground);
+    color: var(--uiColorFont);
+}
+
+.rootContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: var(--uiGapSize);
+    padding-top: calc(2 * var(--uiGapSize));
+    font-size: var(--uiFontSize);
+}
+
+.playerContainer {
+    display: flex;
+    flex-direction: column;
+    gap: var(--uiGapSize);
+    width: calc(var(--cardWidth) + 2 * var(--uiGapSize) + 2 * var(--uiBorderWidth));
+}
+
+.dungeonContainer {
+    display: flex;
+    flex-direction: column;
+    gap: var(--uiGapSize);
+    width: calc(4 * 1.11 * var(--cardWidth) + 5 * var(--uiGapSize) + 2 * var(--uiBorderWidth));
+}
+
+.bagContainer {
+    display: flex;
+    flex-direction: column;
+    gap: var(--uiGapSize);
+    padding: var(--uiGapSize);
+    width: calc(4 * var(--cardWidth) + 5 * var(--uiGapSize) + 2 * var(--uiBorderWidth));
+    border: var(--uiBorderWidth) double var(--fieldColorBorder);
+    position: relative;
+}
+
+.bagContainer:before {
+    display: block;
+    position: absolute;
+    content: '💰';
+    background: var(--uiColorBackground);
+    left: calc(50% - var(--cardWidth) / 3.5);
+    top: calc(var(--uiGapSize) * -1.5);
+    font-size: calc(var(--cardWidth) / 5);
+    width: calc(var(--cardWidth) / 2.5);
+    text-align: center;
+}
+
+.hand {
+    padding: var(--uiGapSize);
+    border: var(--uiBorderWidth) double var(--fieldColorBorder);
+    position: relative;
+}
+
+.hand:before {
+    display: block;
+    content: '✋';
+    position: absolute;
+    left: calc(var(--uiGapSize) * 4);
+    top: calc(var(--uiGapSize) * -1.5);
+    background: var(--uiColorBackground);
+    font-size: calc(var(--cardWidth) / 5);
+    width: calc(var(--cardWidth) / 2.5);
+    text-align: center;
+}
+
+.player {
+    padding: var(--uiGapSize);
+    display: flex;
+    flex-direction: column;
+    gap: var(--uiGapSize);
+    border: var(--uiBorderWidth) double var(--fieldColorBorder);
+}
+
+.health__count:before {
+    content: '❤️';
+    margin-right: var(--uiGapSize);
+}
+
+.gems__count:before {
+    content: '💎';
+    margin-right: var(--uiGapSize);
+}
+
+.magic__count:before {
+    content: '✨';
+    margin-right: var(--uiGapSize);
+}
+
+.dungeon {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    gap: var(--uiGapSize);
+    background: var(--fieldColorBackground);
+    border: var(--uiBorderWidth) double var(--fieldColorBorder);
+    align-self: center;
+    padding: var(--uiGapSize);
+}
+
+.log {
+    padding: var(--uiGapSize);
+    border: var(--uiBorderWidth) double var(--fieldColorBorder);
+    height: calc(2 * var(--cardWidth));
+    overflow-y: auto;
+    font-size: var(--uiFontSizeSmall);
+}
+
+.log p {
+    margin-bottom: var(--uiGapSize);
+    display: flex;
+    gap: var(--uiGapSize);
+}
+
+.playerAction {
+    border: var(--uiBorderWidth) outset var(--fieldColorBorder);
+    padding: calc(var(--uiGapSize) / 2);
+    background: var(--cardColorFace);
+    color: var(--cardColorBlackSuit);
+    font-size: var(--uiFontSizeSmall);
+    cursor: pointer;
+    flex-grow: 1;
+}
+
+.playerAction:active {
+    border: var(--uiBorderWidth) inset var(--fieldColorBorder);
+}
+
+.bagSection {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: var(--uiGapSize);
+    height: var(--cardHeight);
+    position: relative;
+}
+
+.bagSection:empty {
+    outline: var(--cardBorderWidth) dashed var(--cardColorBorder);
+    border-radius: calc(var(--cardWidth) / 20);
+}
+
+.chamber {
+    position: relative;
+}
+
+.chamber--entrance {
+    display: flex;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.chamber--player {
+    outline: calc(2 * var(--cardBorderWidth)) solid goldenrod;
+}
+
+.entrance {
+    align-content: center;
+    padding: var(--uiGapSize);
+    text-align: center;
+}
+
+.entrance__description {
+    color: var(--entranceColor);
+    font-size: var(--uiFontSizeSmall);
+}
+
+.entrance:hover .entrance__description {
+    color: var(--entranceColorActive);
+}
+
+.card {
+    --rank: attr(data-rank);
+    --suit: '';
+    --kind: '';
+    width: var(--cardWidth);
+    height: var(--cardHeight);
+    border: var(--cardBorderWidth) solid var(--cardColorBorder);
+    border-radius: calc(var(--cardWidth) / 20);
+    overflow: hidden;
+    font-size: calc(var(--cardWidth) / 5);
+    position: relative;
+    cursor: pointer;
+}
+
+.card[data-role="enemy"] {
+    --kind: '🐲';
+    top: 0;
+    left: 0;
+    position: absolute;
+}
+
+.card:before {
+    display: block;
+    position: absolute;
+    top: 3%;
+    left: 5%;
+    content: var(--rank) var(--suit) var(--kind);
+}
+
+.card:after {
+    display: block;
+    position: absolute;
+    bottom: 3%;
+    right: 5%;
+    transform: rotate(180deg);
+    content: var(--rank) var(--suit) var(--kind);
+}
+
+.cardActionContainer {
+    --padding: calc(var(--uiGapSize) / 4);
+
+    display: flex;
+    gap: var(--cardBorderWidth);
+    position: relative;
+    padding: 0 calc(1.5 * var(--cardBorderWidth));
+    margin-top: calc(-3 * var(--cardBorderWidth) - var(--uiFontSizeSmall) - 2 * (var(--padding)));
+}
+
+.cardAction {
+    flex: 1;
+    padding: var(--padding);
+    font-size: var(--uiFontSizeSmall);
+    border: var(--cardBorderWidth) solid var(--cardColorBorder);
+    border-radius: calc(var(--cardWidth) / 20);
+    cursor: pointer;
+}
+
+.cardAction[data-action-type="addGems"]:after {
+    content: attr(data-value) '💎';
+}
+
+.cardAction[data-action-type="addHealth"]:after {
+    content: attr(data-value) '❤️';
+}
+
+.cardAction[data-action-type="addMagic"]:after {
+    content: attr(data-value) '✨';
+}
+
+.card[data-state="face"] {
+    background-color: var(--cardColorFace);
+}
+
+.card[data-state="back"] {
+    background-color: var(--cardColorBack);
+}
+
+.card[data-suit="spades"] {
+    --suit: '♠';
+    color: var(--cardColorBlackSuit);
+}
+
+.card[data-suit="clubs"] {
+    --suit: '♣';
+    color: var(--cardColorBlackSuit);
+}
+
+.card[data-suit="hearts"] {
+    --suit: '♥';
+    color: var(--cardColorRedSuit);
+}
+
+.card[data-suit="diamonds"] {
+    --suit: '♦';
+    color: var(--cardColorRedSuit);
+}
+
+.card[data-rank="jack"] {
+    --rank: 'J';
+}
+
+.card[data-rank="queen"] {
+    --rank: 'Q';
+}
+
+.card[data-rank="king"] {
+    --rank: 'K';
+}
+
+.card[data-rank="ace"] {
+    --rank: 'A';
+}
+
+.card[data-rank="joker"] {
+    --rank: '👹';
+    --suit: '';
+    --kind: '';
+}
+
+.card[data-state="back"]:before,
+.card[data-state="back"]:after {
+    display: none;
+}
